@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Array CRUD</title>
+  <style>
+    input[type='submit'], button, [aria-label]{
+      cursor: pointer;
+    }
+    #spoiler{
+      display: none;
+    }
+      #contact{
+    padding:10px 0 10px;
+  }
+
+  .contact-text{
+    margin:45px auto;
+  }
+
+  .mail-message-area{
+    width:100%;
+    padding:0 15px;
+  }
+
+  .mail-message{
+    width: 100%;
+    background:rgba(255,255,255, 0.8) !important;
+    -webkit-transition: all 0.7s;
+    -moz-transition: all 0.7s;
+    transition: all 0.7s;
+    margin:0 auto;
+    border-radius: 0;
+  }
+
+  .not-visible-message{
+    height:0px;
+    opacity: 0;
+  }
+
+  .visible-message{
+    height:auto;
+    opacity: 1;
+    margin:25px auto 0;
+  }
+
+/* Input Styles */
+
+  .form{
+    width: 100%;
+    padding: 15px;
+    background:#f8f8f8;
+    border:1px solid rgba(0, 0, 0, 0.075);
+    margin-bottom:25px;
+    color:#727272 !important;
+    font-size:13px;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+
+  .form:hover{
+    border:1px solid #8BC3A3;
+  }
+
+  .form:focus{
+    color: white;
+    outline: none;
+    border:1px solid #8BC3A3;
+  }
+
+  .textarea{
+    height: 200px;
+    max-height: 200px;
+    max-width: 100%;
+  }
+  
+/* Generic Button Styles */
+
+  .button{
+    padding:8px 12px;
+    background:#0A5175;
+    display: block;
+    width:120px;
+    margin:10px 0 0px 0;
+    border-radius:3px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align:center;
+    font-size:0.8em;
+    box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+  }
+
+  .button:hover{
+    background:#8BC3A3;
+    color:white;
+  }
+
+/* Send Button Styles */
+
+  .form-btn{
+    width:180px;
+    display: block;
+    height: auto;
+    padding:15px;
+    color:#fff;
+    background:#8BC3A3;
+    border:none;
+    border-radius:3px;
+    outline: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    margin:auto;
+    box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    -moz-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+    -webkit-box-shadow: 0px 1px 4px rgba(0,0,0, 0.10);
+  }
+
+  .form-btn:hover{
+    background:#ccc;
+    color: white;
+    border:none;
+  }
+
+  .form-btn:active{
+    opacity: 0.9;
+  }
+      h3 {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 1.9em;
+}
+
+table {
+  width: 100%;
+  margin: 0;
+}
+
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}
+center{
+  margin-top:330px;
+}
+input {
+    position: relative;
+    z-index: 9999;
+}
+      table caption {
+  font-size: 2em;
+text-align:center;
+color:black;
+	padding: .5em 0;
+}
+
+table caption,
+table tfoot tr td {
+  font-weight: normal;
+}
+.wrapper{
+        background-color:#f1f1f1; 
+    height:100%;
+      }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+   
+  
+    <div id="login">
+    <div class="container-fluid">
+    <div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    <!-- Form -->
+                    <h2 style="text-align:center;">Login Your Account</h2>
+                    
+                        <!-- Left Inputs -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3"></div>
+                        <div class="col-xs-6">
+                            <!-- Name -->
+                            
+                            <!-- Email -->
+                            <div class="form-group">
+                            <input type="email" name="mail" id="l_email" required="required" class="form" placeholder="Email" />
+                            </div>
+                            <!-- Subject -->
+                            <div class="form-group">
+                            <input type="password" name="pwd" id="l_pwd" required="required" class="form" placeholder="password" />
+                            </div>
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                            <div class="col-xs-3"></div>
+                        <!--<div class="col-xs-6">
+                             Message 
+                            <input type="number" name="subject" id="add_phone" required="required" class="form" placeholder="Subject" />
+                        </div>--><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button type="submit" name="submit" class="form-btn semibold" onclick="login();">Login</button> <br>
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+                        </div>
+                
+                    
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+
+    </div>
+    </div>
+    
+     
+    
+    
+    
+<!--    
+ <div class="col-sm-6">
+     <div class="row">
+         <div class="col-sm-6">
+             <div>Name</div>
+            <input type="text" id="add_name" placeholder="Name" class="form-controls">
+        </div>
+          <div class="col-sm-6">
+              <div>Code</div>
+           <input type="number" id="add_code" placeholder="code" class="form-controls">
+        </div>
+     
+     </div>
+     <div class="row">
+         <div class="col-sm-6">
+           <div>Phone</div>
+            <input type="number" id="add_phone" placeholder="phone" class="form-controls">
+        </div>
+          <div class="col-sm-6">
+               <div>Email</div>
+             <input type="text" id="add_email" placeholder="email" class="form-controls">
+  
+        </div>
+     
+     </div>
+      <button onclick="saveRecord();">Submit</button>
+    </div>-->
+    
+
+<div id="editor" hidden>
+ 
+     <div class="container-fluid wrapper">
+<div class="inner contact">
+                <!-- Form Area -->
+                <div class="contact-form">
+                    <!-- Form -->
+                    <h2 style="text-align:center;">Update Detail</h2>
+                    
+                        <!-- Left Inputs -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3"></div>
+                        <div class="col-xs-6">
+                            <!-- Name -->
+                            <div class="form-group">
+                            <input type="text" name="name" id="name" required="required" class="form" placeholder="Name" />
+                            </div>
+                            <!-- Email -->
+                            <div class="form-group">
+                            <input type="email" name="mail" id="email" required="required" class="form" placeholder="Email" />
+                            </div>
+                            <!-- Subject -->
+                            <div class="form-group">
+                            <input type="text" name="subject" id="code" required="required" class="form" placeholder="city" />
+                            </div>
+                            <div class="form-group">
+                            <input type="text" name="subject" id="phone" required="required" class="form" placeholder="phone" />
+                            </div>
+                           
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                            <div class="col-xs-3"></div>
+                        <!--<div class="col-xs-6">
+                             Message 
+                            <input type="number" name="subject" id="add_phone" required="required" class="form" placeholder="Subject" />
+                        </div>--><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                            <div class="relative fullwidth col-xs-12">
+                                <div id="kkkk">
+                            <!-- Send Button -->
+                           <!-- <button type="submit" name="submit" class="form-btn semibold" onclick="window.location.reload(); addrecord();">Send Message</button> <br>-->
+                                </div>
+                        </div>                        <!-- Clear -->
+                        <div class="clear"></div>
+                        </div>
+                
+                    
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+
+    </div>
+   
+ 
+</div>
+   
+  
+<div id="afterlogin">
+    
+<div class="container-fluid">
+<div class="inner contact">
+     <div class="col-xs-12">
+                           
+                        <div class="col-xs-3"></div>
+                      
+                        <div class="col-xs-6">
+                            <!-- Name -->
+                           <div class="form-group">
+                               <div class="col-xs-5 ">
+                           <button class="btn btn-info" onclick="user();">user</button><br><br>
+                               </div>
+                               <div class="col-xs-5 ">
+                           <button class="btn btn-info" onclick="invites();">Invite</button><br><br>
+                               </div>
+                               <div class="col-xs-2 pull-right">
+                           <button type="submit" name="submit" class="btn btn-info" onclick="register();">chat</button><br>
+                               </div>
+                            </div>
+                            </div>
+        </div>
+                <!-- Form Area -->
+    <div id="invite">
+                <div class="contact-form">
+                    <!-- Form -->
+                    <h2 style="text-align:center;">Invite User</h2>
+                    
+                        <!-- Left Inputs -->
+                        <div class="col-xs-12">
+                            <div class="col-xs-3"></div>
+                        <div class="col-xs-6">
+                            <!-- Name -->
+                            
+                            <!-- Email -->
+                            <div class="form-group">
+                            <input type="email" name="mail" id="i_email" required="required" class="form" placeholder="Email" />
+                            </div>
+                            <!-- Subject -->
+                            <div class="form-group">
+                            <select name="invitator" id="i_invitator" required="required" class="form">
+                                <option>select</option>
+                                <option>admin</option>
+                                <option>non admin</option>
+                                </select>
+                            </div>
+                        </div><!-- End Left Inputs -->
+                        <!-- Right Inputs -->
+                            <div class="col-xs-3"></div>
+                        <!--<div class="col-xs-6">
+                             Message 
+                            <input type="number" name="subject" id="add_phone" required="required" class="form" placeholder="Subject" />
+                        </div>--><!-- End Right Inputs -->
+                        <!-- Bottom Submit -->
+                        <div class="relative fullwidth col-xs-12">
+                            <!-- Send Button -->
+                            <button type="submit" name="submit" class="form-btn semibold" onclick="addinvite();">invite</button><br>
+                        </div><!-- End Bottom Submit -->
+                        <!-- Clear -->
+                        <div class="clear"></div>
+                        </div>
+                
+                    
+                </div><!-- End Contact Form Area -->
+            </div><!-- End Inner -->
+    <div id="user">
+     <p id="counter"></p>
+        <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+           <table class="table table-bordered">
+                <caption>Show Detail</caption>
+              <thead>
+                <tr>
+                <th>Name</th>
+               <th>City</th>
+               <th>Phone</th>
+               <th>Email</th> 
+              <th>Action</th>
+                </tr>
+              </thead>
+            <tbody id="empTable">
+
+
+            </tbody>
+        </table>
+            </div>
+            </div>
+            </div>
+    </div>
+        </div>
+    </div>
+    </div>
+
+   
+    
+
+<script src="js/index.js"></script>
+
+</body>
+</html>
